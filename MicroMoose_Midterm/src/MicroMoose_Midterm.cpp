@@ -45,12 +45,13 @@ Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS)
 int PIXELCOUNT = 1;
 int n;
 int status;
+int rot = 4;
 
 Adafruit_NeoPixel pixel(PIXELCOUNT, SPI1, WS2812B);
 Adafruit_SSD1306 display(OLED_RESET);
 Adafruit_BME280 bme;
 
-SYSTEM_MODE(AUTOMATIC);
+SYSTEM_MODE(MANUAL);
 
 
 SYSTEM_THREAD(ENABLED);
@@ -77,12 +78,14 @@ display.clearDisplay();
 display.setTextSize(1);
 display.setTextColor(1,0);
 display.setCursor(0,0);
+display.setRotation(4);
 display.printf("I am working :) ... \n");
 display.display();
 
 // BME280
 display.begin(SSD1306_SWITCHCAPVCC,0x3C);
 display.display();
+display.setRotation(4);
 status = bme.begin(hexAddress);
 if(status == false){
   Serial.printf("BME280 at address 0x%02x failed to start \n", hexAddress);
@@ -117,6 +120,7 @@ display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(1,0);
   display.setCursor(0,0);
+  display.setRotation(4);
   display.printf("temp = %0.1f \n", temp);
   display.display();
 
@@ -133,6 +137,7 @@ int quality = sensor.slope();
         display.setTextSize(1);
         display.setTextColor(1,0);
         display.setCursor(0,0);
+        display.setRotation(4);
         display.printf("EMISSIONS LARGE LEAK. SERVICE IMMEDIATELY. \n");
         display.display();
     } 
@@ -142,6 +147,7 @@ int quality = sensor.slope();
         display.setTextSize(1);
         display.setTextColor(1,0);
         display.setCursor(0,0);
+        display.setRotation(4);
         display.printf("CAUTION: EMISSIONS SMALL LEAK LARGE LEAK. \n");
         display.display();
     } 
@@ -151,12 +157,19 @@ int quality = sensor.slope();
         display.setTextSize(1);
         display.setTextColor(1,0);
         display.setCursor(0,0);
+        display.setRotation(4);
         display.printf("CAUTION: EMISSIONS SMALL LEAK. \n");
         display.display();
     } 
     if(quality == AirQualitySensor :: FRESH_AIR) {
       Serial.printf("EMISSIONS WITHIN RANGE. \n"); 
       display.clearDisplay();
+        display.setTextSize(1);
+        display.setTextColor(1,0);
+        display.setCursor(0,0);
+        display.setRotation(4);
+        display.printf("EMISSIONS WITHIN RANGE. \n");
+        display.display();
     }
 
     delay(1000);

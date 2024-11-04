@@ -21,6 +21,7 @@ Feel free to replace this README.md file with your own content, or keep it for r
 ## Introduction
 
 For an in-depth understanding of this project template, please refer to our [documentation](https://docs.particle.io/firmware/best-practices/firmware-template/).
+This project is meant to simulate pulling codes from a vehicle through a built scan tool. The scan tool will connect to the other sensors on the breadboard, and read the temperature and air quality specifications. If they are out of range, it will send a code to the OLED screen, and the user will fix it from there. 
 
 ## Prerequisites To Use This Repository
 
